@@ -65,6 +65,7 @@ def enhanced_file_copy(
     :return: 包含操作结果的字典
     """
     result = {
+        "file_type": file_suffix,
         "total_files": 0,
         "copied": [],
         "skipped": [],
@@ -92,26 +93,6 @@ def enhanced_file_copy(
                 preserve_dirs=preserve_dirs,
                 src_path=src_path
             )
-            # relative_path = os.path.relpath(root, source_root)
-            #
-            # # 构建目标路径
-            # target_subdir = target_root
-            # path_parts = os.path.normpath(relative_path).split(os.sep)
-            # for preserve_dir in preserve_dirs:
-            #     if preserve_dir in path_parts:
-            #         target_subdir = os.path.join(target_root, *path_parts)
-            #         break
-            #
-            # # 获取文件创建时间
-            # creation_time = os.path.getctime(src_path)
-            # # 转换为 datetime 对象
-            # creation_date = datetime.fromtimestamp(creation_time)
-            # # 格式化为 YYYYMMDD
-            # data_str = creation_date.strftime('%Y%m%d')
-            # dst_str = target_subdir.replace("data_str", data_str)
-            # dest_path = os.path.join(dst_str, file)
-            #
-            # os.makedirs(dst_str, exist_ok=True)
 
             try:
                 # 文件存在性检查
@@ -166,84 +147,6 @@ def result_dump(result: dict):
     print(f"跳过文件: {len(result['skipped'])}")
     print(f"哈希不一致: {len(result['hash_mismatch'])}")
     print(f"失败文件: {len(result['failed'])}")
-
-
-def copy_files_by_type(src_dir, dst_dir, file_extension):
-    """
-    将指定路径中的指定类型文件复制到目标路径。
-    如果目标路径不存在，则自动创建。
-
-    :param src_dir: 源目录路径
-    :param dst_dir: 目标目录路径
-    :param file_extension: 文件扩展名（如 '.txt' 或 '.jpg'）
-    """
-
-    cnt = 0
-
-    # 遍历源目录及其子目录
-    for root, dirs, files in os.walk(src_dir):
-        # 遍历文件路径
-        for dir in dirs:
-            # 检查目录名称是否包含 "HYPERLAPSE" 或 "PANORAMA"
-            if "HYPERLAPSE" in dir or "PANORAMA" in dir:
-                # for file in files:
-                #     if file.endswith(file_extension):
-                #         src_file_path = os.path.join(root, file)
-                #
-                #         # 获取文件创建时间
-                #         creation_time = os.path.getctime(src_file_path)
-                #         # 转换为 datetime 对象
-                #         creation_date = datetime.fromtimestamp(creation_time)
-                #         # 格式化为 YYYYMMDD
-                #         data_str = creation_date.strftime('%Y%m%d')
-                #         dst_str = dst_dir.replace("data_str", data_str)
-                #
-                #         # 确保目标目录存在
-                #         if not os.path.exists(dst_str):
-                #             os.makedirs(dst_str)
-                #
-                #         break
-                #
-                # # 如果包含，则将该目录整个复制到目标目录路径下
-                # src_dir_path = os.path.join(root, dir)
-                # dst_dir_path = os.path.join(dst_dir, dir)
-                # # 确保目标目录存在
-                # if not os.path.exists(dst_dir_path):
-                #     os.makedirs(dst_dir_path)
-                # # 复制目录
-                # shutil.copytree(src_dir_path, dst_dir_path, dirs_exist_ok=True)
-                # print(f"复制目录: {src_dir_path} -> {dst_dir_path}")
-                # 移除目录
-                print(f"Skip directory: {dir}")
-                dirs.remove(dir)
-
-        for file in files:
-            # 检查文件扩展名
-            if file.endswith(file_extension):
-                src_file_path = os.path.join(root, file)
-
-                # 获取文件创建时间
-                creation_time = os.path.getctime(src_file_path)
-                # 转换为 datetime 对象
-                creation_date = datetime.fromtimestamp(creation_time)
-                # 格式化为 YYYYMMDD
-                data_str = creation_date.strftime('%Y%m%d')
-                dst_str = dst_dir.replace("data_str", data_str)
-                dst_file_path = os.path.join(dst_str, file)
-
-                # 确保目标目录存在
-                if not os.path.exists(dst_str):
-                    os.makedirs(dst_str)
-
-                if os.path.exists(dst_file_path):
-                    print(f"文件已存在，跳过: {dst_file_path}")
-                    continue
-
-                # 复制文件
-                shutil.copy2(src_file_path, dst_file_path)
-                cnt += 1
-
-    print(f"{file_extension}类型文件已移动： {src_dir} -> {dst_dir}, 共{cnt}项")
 
 
 def nikon_z50_files_move():

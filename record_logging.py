@@ -39,7 +39,7 @@ def log_operation_results(dev: str, result: dict):
     # 记录汇总信息
     logger.info(
         f"设备: {dev} "
-        f"操作完成 | 总数: {result['total_files']} "
+        f"{result['file_type']}类型文件操作完成 | 总数: {result['total_files']} "
         f"成功: {len(result['copied'])} "
         f"跳过: {len(result['skipped'])} "
         f"失败: {len(result['failed'])}"
