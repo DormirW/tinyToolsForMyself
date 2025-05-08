@@ -3,6 +3,7 @@ import shutil
 import hashlib
 from tqdm import tqdm
 from datetime import datetime
+from record_logging import log_operation_results
 
 
 def _compute_file_hash(file_path: str, algorithm: str = "sha256") -> str:
@@ -248,7 +249,8 @@ def copy_files_by_type(src_dir, dst_dir, file_extension):
 def nikon_z50_files_move():
     # 源目录
     src_directory = r"G:\DCIM"
-
+    dev = "NIKON Z50"
+    
     # 移动raw格式文件
     dst_directory = r"F:\Photos\NIKON_Z50\data_str\RAW"
     file_type = ".NEF"
@@ -260,7 +262,7 @@ def nikon_z50_files_move():
             overwrite=False,
             hash_algorithm="sha256"
     )
-    result_dump(r)
+    log_operation_results(dev, r)
 
     # 移动jpg格式文件
     dst_directory = r"F:\PHOTOS\NIKON_Z50\data_str\JPEG"
@@ -273,7 +275,7 @@ def nikon_z50_files_move():
         overwrite=False,
         hash_algorithm="sha256"
     )
-    result_dump(r)
+    log_operation_results(dev, r)
 
     # 移动mov格式文件
     dst_directory = r"F:\PHOTOS\NIKON_Z50\data_str\MOV"
@@ -286,7 +288,7 @@ def nikon_z50_files_move():
         overwrite=False,
         hash_algorithm="sha256"
     )
-    result_dump(r)
+    log_operation_results(dev, r)
 
     print("Nikon z50 files have been all done!")
 
@@ -294,6 +296,7 @@ def nikon_z50_files_move():
 def dji_pokect3_files_move():
     # 源目录
     src_directory = r"G:\DCIM"
+    dev = "DJI POCKET3"
 
     # 移动raw格式文件
     dst_directory = r"F:\Photos\DJI_POCKET3\data_str\RAW"
@@ -311,7 +314,7 @@ def dji_pokect3_files_move():
         overwrite=False,
         hash_algorithm="sha256"
     )
-    result_dump(r)
+    log_operation_results(dev, r)
 
     # 移动LRF格式文件
     dst_directory = r"F:\Photos\DJI_POCKET3\data_str\PREVIEW"
@@ -324,7 +327,7 @@ def dji_pokect3_files_move():
         overwrite=False,
         hash_algorithm="sha256"
     )
-    result_dump(r)
+    log_operation_results(dev, r)
 
     # 移动MP4格式文件
     dst_directory = r"F:\Photos\DJI_POCKET3\data_str\MOV"
@@ -337,7 +340,7 @@ def dji_pokect3_files_move():
         overwrite=False,
         hash_algorithm="sha256"
     )
-    result_dump(r)
+    log_operation_results(dev, r)
 
     print("Dji pocket3 files have been all done!")
 
@@ -345,6 +348,7 @@ def dji_pokect3_files_move():
 def dji_flip_files_move():
     # 源目录
     src_directory = r"G:\DCIM"
+    dev = "DJI FLIP"
 
     # 移动MP4格式文件
     dst_directory = r"F:\Photos\DJI_FLIP\data_str\MOV"
@@ -357,7 +361,7 @@ def dji_flip_files_move():
         overwrite=False,
         hash_algorithm="sha256"
     )
-    result_dump(r)
+    log_operation_results(dev, r)
 
     # 移动音频文件
     dst_directory = r"F:\Photos\DJI_FLIP\data_str\AUDIO"
@@ -370,7 +374,7 @@ def dji_flip_files_move():
         overwrite=False,
         hash_algorithm="sha256"
     )
-    result_dump(r)
+    log_operation_results(dev, r)
 
     # 移动raw格式文件
     dst_directory = r"F:\Photos\DJI_FLIP\data_str\RAW"
@@ -383,7 +387,7 @@ def dji_flip_files_move():
         overwrite=False,
         hash_algorithm="sha256"
     )
-    result_dump(r)
+    log_operation_results(dev, r)
 
     # 移动JPG格式文件
     dst_directory = r"F:\Photos\DJI_FLIP\data_str\JPEG"
@@ -396,7 +400,7 @@ def dji_flip_files_move():
         overwrite=False,
         hash_algorithm="sha256"
     )
-    result_dump(r)
+    log_operation_results(dev, r)
 
     # 移动SRT格式文件
     dst_directory = r"F:\Photos\DJI_FLIP\data_str\SRT"
@@ -409,7 +413,7 @@ def dji_flip_files_move():
         overwrite=False,
         hash_algorithm="sha256"
     )
-    result_dump(r)
+    log_operation_results(dev, r)
 
     print("Dji flip files have been all done!")
 
