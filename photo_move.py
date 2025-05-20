@@ -153,17 +153,17 @@ def nikon_z50_files_move():
     # 源目录
     src_directory = r"G:\DCIM"
     dev = "NIKON Z50"
-    
+
     # 移动raw格式文件
     dst_directory = r"F:\Photos\NIKON_Z50\data_str\RAW"
     file_type = ".NEF"
     r = enhanced_file_copy(
-            source_root=src_directory,
-            target_root=dst_directory,
-            preserve_dirs=[],
-            file_suffix=file_type,
-            overwrite=False,
-            hash_algorithm="sha256"
+        source_root=src_directory,
+        target_root=dst_directory,
+        preserve_dirs=[],
+        file_suffix=file_type,
+        overwrite=False,
+        hash_algorithm="sha256"
     )
     log_operation_results(dev, r)
 
@@ -194,6 +194,69 @@ def nikon_z50_files_move():
     log_operation_results(dev, r)
 
     print("Nikon z50 files have been all done!")
+
+
+def sony_a7c2_files_move():
+    # 源目录
+    src_directory = r"G:\DCIM"
+    dev = "SONY A7C2"
+
+    # 移动raw格式文件
+    dst_directory = r"F:\Photos\SONY_A7C2\data_str\RAW"
+    file_type = ".ARW"
+    r = enhanced_file_copy(
+        source_root=src_directory,
+        target_root=dst_directory,
+        preserve_dirs=[],
+        file_suffix=file_type,
+        overwrite=False,
+        hash_algorithm="sha256"
+    )
+    log_operation_results(dev, r)
+
+    # 移动jpg格式文件
+    dst_directory = r"F:\PHOTOS\SONY_A7C2\data_str\JPEG"
+    file_type = ".JPG"
+    r = enhanced_file_copy(
+        source_root=src_directory,
+        target_root=dst_directory,
+        preserve_dirs=["PANORAMA", "HYPERLAPSE"],
+        file_suffix=file_type,
+        overwrite=False,
+        hash_algorithm="sha256"
+    )
+    log_operation_results(dev, r)
+
+    # 源目录
+    src_directory = r"G:\PRIVATE"
+
+    # 移动mov格式文件
+    dst_directory = r"F:\PHOTOS\SONY_A7C2\data_str\VIDEO"
+    file_type = ".MP4"
+    r = enhanced_file_copy(
+        source_root=src_directory,
+        target_root=dst_directory,
+        preserve_dirs=[],
+        file_suffix=file_type,
+        overwrite=False,
+        hash_algorithm="sha256"
+    )
+    log_operation_results(dev, r)
+
+    # 移动xml格式文件
+    dst_directory = r"F:\PHOTOS\SONY_A7C2\data_str\XML"
+    file_type = ".XML"
+    r = enhanced_file_copy(
+        source_root=src_directory,
+        target_root=dst_directory,
+        preserve_dirs=[],
+        file_suffix=file_type,
+        overwrite=False,
+        hash_algorithm="sha256"
+    )
+    log_operation_results(dev, r)
+
+    print("Sony a7c2 files have been all done!")
 
 
 def dji_pokect3_files_move():
@@ -325,6 +388,10 @@ if __name__ == "__main__":
     if os.path.exists(r"G:\NIKON_Z50_FLAG"):
         print(f"检测到nikon z50存储卡插入，开始处理文件...")
         nikon_z50_files_move()
+
+    if os.path.exists(r"G:\SONY_A7C2_FLAG"):
+        print(f"检测到sony a7c2存储卡插入，开始处理文件...")
+        sony_a7c2_files_move()
 
     if os.path.exists(r"G:\DJI_POCKET3_FLAG"):
         print(f"检测到dji pocket3存储卡插入，开始处理文件...")
